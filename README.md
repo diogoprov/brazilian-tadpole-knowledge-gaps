@@ -16,7 +16,7 @@ This repository is archived on Zenodo for long-term reproducibility. It is a **s
 │   ├── saturation_analysis.qmd       # Figure 2 (rarefaction/extrapolation + projection)
 │   └── figure3_genus_completeness.R  # Figure 3 (genus completeness on phylogeny + Fritz & Purvis D)
 ├── data/
-│   ├── species_v5.1.1_2026-06-15.json   # frozen snapshot of the database
+│   ├── species_v5.1.1_2026-09-24.json   # frozen snapshot of the database
 │   └── portik2023_timetree.tre          # Portik et al. (2023) timetree (5323 tips)
 ├── figures/                          # rendered outputs land here
 ├── CITATION.cff
@@ -36,10 +36,10 @@ All three figure scripts are fully reproducible from the frozen data in `data/`.
 
 ## Data provenance and license
 
-- **Data** (`data/species_v5.1.1_2026-06-15.json`): frozen snapshot of *The Rossa-Feres
-Tadpole Database* **v5.1.1 (15 June 2026)**, exactly as cited in the paper
-(1,062 species). Extracted from the live project
-[Brazilian-Tadpoles-5.0](https://github.com/diogoprov/Brazilian-Tadpoles-5.0) at commit `e546040`. Licensed **CC-BY 4.0**.
+- **Data** (`data/species_v5.1.1_2026-09-24.json`): frozen snapshot of *The Rossa-Feres
+Tadpole Database* **v5.1.1 (24 September 2026)**, exactly as cited in the paper
+(1,063 species). Extracted from the live project
+[Brazilian-Tadpoles-5.0](https://github.com/diogoprov/Brazilian-Tadpoles-5.0). Licensed **CC-BY 4.0**.
 - **Tree** (`data/portik2023_timetree.tre`): Portik et al. (2023) phylogenomic timetree
 (5,323 amphibian tips). Used in Figure 3 for phylogenetic ordering and in the
 Fritz & Purvis (2010) D statistic calculation.

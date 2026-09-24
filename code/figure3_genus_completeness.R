@@ -13,7 +13,7 @@
 #   Also computes the D statistic of Fritz & Purvis (2010) for phylogenetic
 #   signal of the described/undescribed pattern per character set.
 #
-# INPUT : ../data/species_v5.1.1_2026-06-15.json   (frozen snapshot)
+# INPUT : ../data/species_v5.1.1_2026-09-24.json   (frozen snapshot)
 #         ../data/portik2023_timetree.tre           (Portik et al. 2023, 5323 tips)
 # OUTPUT: ../figures/genus_completeness.png / .tif
 # =============================================================================
@@ -28,7 +28,7 @@ library(caper)
 
 # ── 0) Paths ─────────────────────────────────────────────────────────────────
 PROJECT <- here::here()
-JSON    <- file.path(PROJECT, "data", "species_v5.1.1_2026-06-15.json")
+JSON    <- file.path(PROJECT, "data", "species_v5.1.1_2026-09-24.json")
 TREE    <- file.path(PROJECT, "data", "portik2023_timetree.tre")
 
 # ── 1) Load data ─────────────────────────────────────────────────────────────

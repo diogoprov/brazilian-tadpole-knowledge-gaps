@@ -9,7 +9,7 @@
 #   (B) Number of unique references describing Brazilian tadpoles, by decade.
 #       Dashed line = literature cutoff of Provete et al. (2012).
 #
-# INPUT : data/species_v5.1.1_2026-06-15.json  (frozen snapshot; use here::here())
+# INPUT : data/species_v5.1.1_2026-09-24.json  (frozen snapshot; use here::here())
 # OUTPUT: figures/coverage.png / .tif
 # =============================================================================
 
@@ -21,7 +21,7 @@ library(patchwork)
 
 # ── 0) Paths ─────────────────────────────────────────────────────────────────
 PROJECT <- here::here()
-JSON    <- file.path(PROJECT, "data", "species_v5.1.1_2026-06-15.json")
+JSON    <- file.path(PROJECT, "data", "species_v5.1.1_2026-09-24.json")
 
 # ── 1) Load data ─────────────────────────────────────────────────────────────
 d   <- fromJSON(JSON, simplifyVector = FALSE)

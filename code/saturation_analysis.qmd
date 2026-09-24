@@ -25,7 +25,7 @@ execute:
          Brazil: a 14-year update. Biota Neotropica.
   This document reproduces the SATURATION ANALYSIS (Figure 2 of the
   manuscript). Input data are frozen at
-  data/species_v5.1.1_2026-06-15.json
+  data/species_v5.1.1_2026-09-24.json
   (The Rossa-Feres Tadpole Database v5.1.1, 15 Jun 2026).
   Run from the repository root: quarto render code/saturation_analysis.qmd
   ------------------------------------------------------------------
@@ -51,7 +51,7 @@ theme_set(theme_minimal(base_size = 10) +
 
 # Caminho do projeto — ajuste se rodar de outro lugar
 PROJECT <- here::here()  # ou: "."
-JSON    <- file.path(PROJECT, "data", "species_v5.1.1_2026-06-15.json")  # frozen snapshot
+JSON    <- file.path(PROJECT, "data", "species_v5.1.1_2026-09-24.json")  # frozen snapshot
 ```
 
 ## 1) Carregar dados e montar matrizes de incidência
@@ -160,25 +160,26 @@ p_inext
 
 A análise acima estima quando o ritmo *atual* satura. Mas o número de spp brasileiras
 não é fixo. Provete et al. (2012) reportou 738 spp com girino livre-natante; o banco
-2026 traz **1057** spp (mesma definição, taxonomia atualizada). Entre 2012 e 2026
-foram **+23 spp/ano** em média.
+2026 traz **`r length(spp)`** spp (mesma definição, taxonomia atualizada). Entre 2012 e 2026
+foram **+`r round((length(spp) - 738) / (2026 - 2012), 1)` spp/ano** em média.
 
 Vamos projetar três cenários e calcular **a cobertura percentual** = nº descrito / N(t)
 ao longo do tempo.
 
 ```{r dynamic-N}
 # --- Parâmetros — ajuste à vontade ----------------------------------------
-N_now            <- length(spp)         # 1057 (julho 2026, banco 5.1.0)
+N_now            <- length(spp)
 year_now         <- 2026
 
 # Taxa de descrição de NOVAS spp brasileiras (free-swimming) por ano
 # Cenário 1: estagnação (rate = 0) — what-if hipotético
-# Cenário 2: ritmo histórico 2012-2026 = (1057-738)/(2026-2012) ≈ 22.8 spp/ano
-# Cenário 3: ritmo "boom 2010s" — global ~150 spp/ano,
-#            BR é ~10-15% do total → ~20 spp/ano (similar ao histórico)
-new_spp_rates <- c(`Static N (1057)`             = 0,
-                   `Historical rate (~23/year)`  = 22.8,
-                   `Conservative (~10/year)`     = 10)
+# Cenário 2: ritmo histórico 2012-2026 = (N_now-738)/(2026-2012) spp/ano
+# Cenário 3: conservador ~10 spp/ano
+hist_rate <- round((N_now - 738) / (2026 - 2012), 1)
+static_label <- paste0("Static N (", N_now, ")")
+hist_label   <- paste0("Historical rate (~", round(hist_rate), "/year)")
+new_spp_rates <- setNames(c(0, hist_rate, 10),
+                          c(static_label, hist_label, "Conservative (~10/year)"))
 
 # Cenário de descrições futuras por caráter — ritmo recente (refs/ano nos
 # últimos 10 anos, derivado dos dados):
@@ -243,12 +244,10 @@ p_dyn <- ggplot(scen, aes(year, coverage_pct,
   scale_color_manual(values = c(`External morphology` = "#2e6b4f",
                                 `Internal oral`       = "#7aa44a",
                                 `Chondrocranium`      = "#c9881e")) +
-  scale_linetype_manual(values = c("Static N (1057)"             = "solid",
-                                   "Historical rate (~23/year)"  = "longdash",
-                                   "Conservative (~10/year)"     = "dotted")) +
-  scale_linewidth_manual(values = c("Static N (1057)"             = 1.2,
-                                    "Historical rate (~23/year)"  = 0.9,
-                                    "Conservative (~10/year)"     = 0.7),
+  scale_linetype_manual(values = setNames(c("solid", "longdash", "dotted"),
+                                          c(static_label, hist_label, "Conservative (~10/year)"))) +
+  scale_linewidth_manual(values = setNames(c(1.2, 0.9, 0.7),
+                                           c(static_label, hist_label, "Conservative (~10/year)")),
                          guide = "none") +
   labs(x = "Year", y = "Coverage (described / total spp)",
        color = "Character", linetype = "Species pool scenario") +

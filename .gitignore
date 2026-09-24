@@ -10,6 +10,7 @@
 *_files/
 *_cache/
 /code/*.html
+/code/*.pdf
 
 # macOS
 .DS_Store

@@ -1,7 +1,7 @@
 cff-version: 1.2.0
 message: "If you use this code or data, please cite both the article and this archived repository."
 title: "Code and data for: Knowledge gaps on the larval morphology of free-swimming anuran tadpoles from Brazil: a 14-year update"
-abstract: "R/Quarto code and a frozen data snapshot to reproduce the figures of Provete & da Silva (2026, Biota Neotropica). Data are a snapshot of The Rossa-Feres Tadpole Database v5.1.1 (15 June 2026)."
+abstract: "R/Quarto code and a frozen data snapshot to reproduce the figures of Provete & da Silva (2026, Biota Neotropica). Data are a snapshot of The Rossa-Feres Tadpole Database v5.1.1 (24 September 2026)."
 type: software
 authors:
   - family-names: "Provete"
@@ -14,9 +14,9 @@ authors:
     affiliation: "Universidade Federal de São Carlos (UFSCar), Sorocaba"
     # orcid: "https://orcid.org/0000-0000-0000-0000"   # TODO: ORCID do Fernando
 license: MIT
-# doi: "10.5281/zenodo.XXXXXXX"   # TODO: preencha com o Concept DOI do Zenodo após o primeiro release
+doi: "10.5281/zenodo.22885423"
 version: "1.0.0"
-date-released: "2026-09-22"
+date-released: "2026-09-24"
 repository-code: "https://github.com/diogoprov/brazilian-tadpole-knowledge-gaps"  # TODO: ajuste ao nome final do repo
 keywords:
   - Anura
