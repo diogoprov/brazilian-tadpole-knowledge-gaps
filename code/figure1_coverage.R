@@ -3,8 +3,8 @@
 # Paper: Provete D.B. & da Silva F.R. (2026), Biota Neotropica
 #
 #   (A) Percentage of species in each family with described external morphology
-#       (dark green), internal oral cavity (light green), and chondrocranium
-#       (orange). Sample size (n) per family in parentheses on the x-axis;
+#       (blue), internal oral cavity (bluish green), and chondrocranium
+#       (vermillion). Palette: Okabe & Ito (2008), colour-blind safe. Sample size (n) per family in parentheses on the x-axis;
 #       families sorted by descending n.
 #   (B) Number of unique references describing Brazilian tadpoles, by decade.
 #       Dashed line = literature cutoff of Provete et al. (2012).
@@ -32,9 +32,9 @@ chars      <- c("ext_morph", "internal_oral", "chondrocranium")
 char_label <- c(ext_morph      = "External morphology",
                 internal_oral  = "Internal oral",
                 chondrocranium = "Chondrocranium")
-char_colors <- c("External morphology" = "#2e6b4f",
-                 "Internal oral"       = "#7aa44a",
-                 "Chondrocranium"      = "#c9881e")
+char_colors <- c("External morphology" = "#0072B2",
+                 "Internal oral"       = "#009E73",
+                 "Chondrocranium"      = "#D55E00")
 
 # Build a tidy data frame: one row per species
 sp_df <- do.call(rbind, lapply(spp, function(s) {
@@ -134,9 +134,9 @@ cutoff_x <- which(decade_df$decade == 2010)
 
 p_b <- ggplot(decade_df, aes(x = decade_label, y = n, group = 1)) +
   # Shaded area under curve
-  geom_area(fill = "#2e6b4f", alpha = 0.25) +
-  geom_line(color = "#2e6b4f", linewidth = 0.8) +
-  geom_point(color = "#2e6b4f", size = 1.5) +
+  geom_area(fill = "#0072B2", alpha = 0.25) +
+  geom_line(color = "#0072B2", linewidth = 0.8) +
+  geom_point(color = "#0072B2", size = 1.5) +
   # Provete et al. (2012) cutoff line
   geom_vline(xintercept = which(decade_df$decade == 2010) + 0.2,
              linetype = "dashed", color = "grey50", linewidth = 0.5) +
@@ -146,10 +146,10 @@ p_b <- ggplot(decade_df, aes(x = decade_label, y = n, group = 1)) +
            ymin = -Inf, ymax = Inf,
            fill = "grey80", alpha = 0.3) +
   annotate("text",
-           x = which(decade_df$decade == 2010) + 1.3,
-           y = max(decade_df$n) * 0.85,
+           x = which(decade_df$decade == 2010) - 0.3,
+           y = max(decade_df$n) * 0.88,
            label = "Provete et al. (2012)\nliterature cutoff",
-           size = 3, color = "grey40", hjust = 0) +
+           size = 2.8, color = "grey40", hjust = 1, vjust = 1) +
   annotate("text", x = 2, y = max(decade_df$n) * 0.95,
            label = paste0("n = ", n_unique, " unique references"),
            size = 3.5, hjust = 0) +

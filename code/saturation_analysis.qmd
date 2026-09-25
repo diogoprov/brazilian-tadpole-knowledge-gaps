@@ -65,11 +65,35 @@ Hsieh, Ma & Chao 2016).
 d <- fromJSON(JSON, simplifyVector = FALSE)
 spp <- d$species
 
-# Função: extrai chave única de uma ref (DOI quando existe, senão raw)
-ref_key <- function(r) {
-  if (!is.null(r$doi)  && nzchar(r$doi))  return(paste0("doi:",  r$doi))
-  if (!is.null(r$raw)  && nzchar(r$raw))  return(paste0("raw:",  r$raw))
-  return(NA_character_)
+# --- Obras compostas -------------------------------------------------------
+# Compêndios multiautorais em que CADA espécie recebe um tratamento
+# independente (prancha própria, autoria própria). Bibliograficamente são UMA
+# referência — e assim são contadas na Figura 1B e no total de refs do texto.
+# Para a análise de saturação, porém, a unidade amostral relevante é o esforço
+# descritivo aplicado a cada espécie, não o ato editorial de reuni-los num
+# volume. Tratar um compêndio de centenas de tratamentos como uma única
+# unidade amostral criaria um "mega-sample" que achata artificialmente a curva
+# de rarefação e subestima o estimador assintótico. Por isso, aqui cada
+# tratamento específico conta como uma unidade amostral separada.
+#
+# Identificados pelo ISBN presente no campo `raw`.
+COMPOSITE_WORKS <- c(
+  "978-65-992458-3-1"   # Rossa-Feres, D. C. (Ed.) 2024. Girinos do Brasil.
+)
+
+is_composite <- function(key) {
+  any(vapply(COMPOSITE_WORKS, function(isbn) grepl(isbn, key, fixed = TRUE),
+             logical(1)))
+}
+
+# Chave única de uma ref (DOI quando existe, senão raw).
+# Para obras compostas, a chave é sufixada com o id da espécie, de modo que
+# cada tratamento específico vire uma unidade amostral distinta.
+ref_key <- function(r, sp_id = NULL) {
+  base <- if (!is.null(r$doi) && nzchar(r$doi)) paste0("doi:", r$doi)
+          else if (!is.null(r$raw) && nzchar(r$raw)) paste0("raw:", r$raw)
+          else return(NA_character_)
+  if (!is.null(sp_id) && is_composite(base)) paste0(base, "##", sp_id) else base
 }
 
 # Para cada caráter: lista de (sp_id, ref_key) onde a ref descreve o caráter
@@ -83,7 +107,7 @@ build_incidence <- function(ch) {
   for (s in spp) {
     refs <- s[[ch]]$refs
     for (r in refs) {
-      k <- ref_key(r)
+      k <- ref_key(r, s$id)
       if (!is.na(k))
         rows[[length(rows)+1]] <- data.frame(sp = s$id, ref = k,
                                              stringsAsFactors = FALSE)
@@ -141,13 +165,13 @@ out$AsyEst
 ```{r inext-plot, fig.height=5}
 # Curvas com bandas de CI 95% (bootstrap)
 p_inext <- ggiNEXT(out, type = 1, color.var = "Assemblage") +
-  scale_color_manual(values = c(ext_morph = "#2e6b4f",
-                                internal_oral = "#7aa44a",
-                                chondrocranium = "#c9881e"),
+  scale_color_manual(values = c(ext_morph = "#0072B2",
+                                internal_oral = "#009E73",
+                                chondrocranium = "#D55E00"),
                      labels = char_label) +
-  scale_fill_manual(values = c(ext_morph = "#2e6b4f",
-                               internal_oral = "#7aa44a",
-                               chondrocranium = "#c9881e"),
+  scale_fill_manual(values = c(ext_morph = "#0072B2",
+                               internal_oral = "#009E73",
+                               chondrocranium = "#D55E00"),
                     labels = char_label) +
   labs(x = "Number of unique references (sampling units)",
        y = "Species described",
@@ -241,9 +265,9 @@ p_dyn <- ggplot(scen, aes(year, coverage_pct,
   scale_y_continuous(limits = c(0, 100),
                      breaks = c(0, 25, 50, 75, 80, 95, 100),
                      labels = paste0(c(0, 25, 50, 75, 80, 95, 100), "%")) +
-  scale_color_manual(values = c(`External morphology` = "#2e6b4f",
-                                `Internal oral`       = "#7aa44a",
-                                `Chondrocranium`      = "#c9881e")) +
+  scale_color_manual(values = c(`External morphology` = "#0072B2",
+                                `Internal oral`       = "#009E73",
+                                `Chondrocranium`      = "#D55E00")) +
   scale_linetype_manual(values = setNames(c("solid", "longdash", "dotted"),
                                           c(static_label, hist_label, "Conservative (~10/year)"))) +
   scale_linewidth_manual(values = setNames(c(1.2, 0.9, 0.7),
@@ -289,6 +313,18 @@ print(ms, n = Inf)
 
 ## Notas metodológicas
 
+- **Unidade amostral e obras compostas**: cada referência única é uma unidade
+  amostral, com uma exceção deliberada. Compêndios multiautorais em que cada
+  espécie recebe um tratamento próprio — atualmente apenas Rossa-Feres (Ed.)
+  2024, *Girinos do Brasil*, com 366 espécies brasileiras e 23 autores — são
+  desagregados em uma unidade amostral por espécie (ver `COMPOSITE_WORKS` no
+  chunk `data`). A razão é que a curva de rarefação mede acúmulo de **esforço
+  descritivo**, e um volume que reúne centenas de tratamentos independentes
+  representa esse esforço tantas vezes quantas espécies trata; contá-lo como
+  uma única unidade cria um *mega-sample* que achata a curva e subestima o
+  assintótico. Bibliograficamente o volume continua sendo **uma** referência,
+  e é assim que aparece no total de refs e na Figura 1B — a desagregação vale
+  só para esta análise.
 - **iNEXT**: Hsieh, Ma & Chao (2016) doi:10.1111/2041-210X.12613.
   Aqui usei `q = 0` (richness, q-Hill número 0). Para diversidade taxonômica
   ponderada por abundância de descrições, pode-se rodar também `q = c(0,1,2)`
