@@ -8,13 +8,13 @@ authors:
     given-names: "Diogo B."
     affiliation: "Universidade Federal de Mato Grosso do Sul; Gothenburg Global Biodiversity Centre"
     email: "diogo.provete@ufms.br"
-    # orcid: "https://orcid.org/0000-0000-0000-0000"   # TODO: preencha seu ORCID
+    orcid: "https://orcid.org/0000-0002-0097-0651"
   - family-names: "da Silva"
     given-names: "Fernando R."
     affiliation: "Universidade Federal de São Carlos (UFSCar), Sorocaba"
-    # orcid: "https://orcid.org/0000-0000-0000-0000"   # TODO: ORCID do Fernando
+    orcid: "https://orcid.org/0000-0002-0983-3207"
 license: MIT
-doi: "10.5281/zenodo.22885423"
+doi: "10.5281/zenodo.22885422"
 version: "1.0.0"
 date-released: "2026-09-24"
 repository-code: "https://github.com/diogoprov/brazilian-tadpole-knowledge-gaps"  # TODO: ajuste ao nome final do repo
