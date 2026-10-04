@@ -97,7 +97,7 @@ for (s in spp) {
     refs <- s[[ch]]$refs
     for (r in refs) {
       key <- if (!is.null(r$doi) && nzchar(r$doi)) {
-        paste0("doi:", r$doi)
+        paste0("doi:", tolower(r$doi))
       } else if (!is.null(r$raw) && nzchar(r$raw)) {
         paste0("raw:", r$raw)
       } else {

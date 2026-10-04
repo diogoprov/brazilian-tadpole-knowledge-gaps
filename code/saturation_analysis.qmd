@@ -90,7 +90,7 @@ is_composite <- function(key) {
 # Para obras compostas, a chave é sufixada com o id da espécie, de modo que
 # cada tratamento específico vire uma unidade amostral distinta.
 ref_key <- function(r, sp_id = NULL) {
-  base <- if (!is.null(r$doi) && nzchar(r$doi)) paste0("doi:", r$doi)
+  base <- if (!is.null(r$doi) && nzchar(r$doi)) paste0("doi:", tolower(r$doi))
           else if (!is.null(r$raw) && nzchar(r$raw)) paste0("raw:", r$raw)
           else return(NA_character_)
   if (!is.null(sp_id) && is_composite(base)) paste0(base, "##", sp_id) else base
