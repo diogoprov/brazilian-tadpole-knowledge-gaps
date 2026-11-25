@@ -36,4 +36,6 @@ preferred-citation:
       given-names: "Fernando R."
   journal: "Biota Neotropica"
   year: 2026
-  # doi: "10.1590/XXXX"   # TODO: DOI do artigo quando sair
+  doi: "10.1590/1676-0611-BN-2026-1945"
+  volume: 26
+  issue: 4

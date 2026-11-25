@@ -3,7 +3,7 @@
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.22885422.svg)](https://doi.org/10.5281/zenodo.22885422)
 
 Code and a frozen data snapshot to reproduce the figures of:
-> Provete, D.B. & da Silva, F.R. (2026). *Knowledge gaps on the larval morphology of free-swimming anuran tadpoles from Brazil: a 14-year update.* Biota Neotropica.
+> Provete, D.B. & da Silva, F.R. (2026). *Knowledge gaps on the larval morphology of free-swimming anuran tadpoles from Brazil: a 14-year update.* Biota Neotropica 26(4): e20261945. [https://doi.org/10.1590/1676-0611-BN-2026-1945](https://doi.org/10.1590/1676-0611-BN-2026-1945)
 
 This repository is archived on Zenodo for long-term reproducibility. It is a **standalone snapshot**: it does not track the live database, so the figures here will always regenerate from the exact data used in the paper.
 
@@ -74,6 +74,8 @@ Para travar as versões exatas dos pacotes (recomendado para o paper), use [`ren
 ## How to cite
 
 Please cite **both** the article and this archived repository:
+
+> Provete, D.B. & da Silva, F.R. (2026). Knowledge gaps on the larval morphology of free-swimming anuran tadpoles from Brazil: a 14-year update. *Biota Neotropica* 26(4): e20261945. [https://doi.org/10.1590/1676-0611-BN-2026-1945](https://doi.org/10.1590/1676-0611-BN-2026-1945)
 
 > Provete, D.B. & da Silva, F.R. (2026). Code and data for "Knowledge gaps on the larval morphology of free-swimming anuran tadpoles from Brazil: a 14-year update". Zenodo. [https://doi.org/10.5281/zenodo.22885422](https://doi.org/10.5281/zenodo.22885422)
 
