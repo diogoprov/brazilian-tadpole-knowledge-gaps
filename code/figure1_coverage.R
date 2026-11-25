@@ -170,7 +170,7 @@ fig1 <- p_a / p_b +
 ggsave(file.path(PROJECT, "figures", "coverage.png"),
        fig1, width = 7.2, height = 9, dpi = 300, bg = "white")
 ggsave(file.path(PROJECT, "figures", "coverage.tif"),
-       fig1, width = 7.2, height = 9, dpi = 300, bg = "white",
+       fig1, width = 7.2, height = 9, dpi = 600, bg = "white",
        compression = "lzw")
 
 cat("Figure 1 saved to figures/coverage.png and .tif\n")

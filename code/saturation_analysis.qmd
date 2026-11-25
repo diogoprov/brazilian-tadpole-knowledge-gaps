@@ -154,6 +154,7 @@ inc_freq <- lapply(inc_list, to_inext_freq)
 
 # Executa iNEXT (q = 0 = species richness)
 # size argument: até onde extrapolar (default = 2 * T)
+set.seed(2026)  # reprodutibilidade do bootstrap
 out <- iNEXT(inc_freq, q = 0, datatype = "incidence_freq",
              endpoint = NULL,    # default = 2*T
              nboot    = 200)     # bootstrap CI (default 50; aumente p/ paper)
@@ -289,7 +290,7 @@ final
 ggsave(file.path(PROJECT, "figures", "saturation.png"),
        final, width = 7.2, height = 8, dpi = 300, bg = "white")
 ggsave(file.path(PROJECT, "figures", "saturation.tif"),
-       final, width = 7.2, height = 8, dpi = 300, bg = "white",
+       final, width = 7.2, height = 8, dpi = 600, bg = "white",
        compression = "lzw")
 ```
 

@@ -262,7 +262,7 @@ H <- max(7, 0.115 * length(genus_plot_order) + 2)
 ggsave(file.path(OUTDIR, "genus_completeness.png"), fig3,
        width = 8.2, height = H, dpi = 300, bg = "white", limitsize = FALSE)
 ggsave(file.path(OUTDIR, "genus_completeness.tif"), fig3,
-       width = 8.2, height = H, dpi = 300, bg = "white",
+       width = 8.2, height = H, dpi = 600, bg = "white",
        compression = "lzw", limitsize = FALSE)
 message("Saved figures/genus_completeness.{png,tif}")
 
